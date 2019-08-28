@@ -1,0 +1,203 @@
+input: "WarpedLF"
+input_dim: 1 input_dim: 81 input_dim: 500 input_dim: 500
+input: "label"
+input_dim: 1 input_dim: 1 input_dim: 500 input_dim: 500
+
+
+layer {
+    name: "Crop1"
+    type: "Crop"
+    bottom: "WarpedLF"
+    bottom: "label"
+    top: "VDSR_CV"
+    crop_param {
+        axis: 1
+        offset: 40
+        offset: 0
+        offset: 0
+    }
+}
+
+layer {
+	name: "ConvColor1"
+	type: "Convolution"
+	bottom: "WarpedLF"
+	top: "ConvColor1"
+	param {
+    	name: "conv1c_w"
+    	lr_mult: 1
+    	decay_mult: 1
+    }
+    param {
+    	name: "conv1c_b"
+    	lr_mult: 2
+    	decay_mult: 0
+    }
+    convolution_param {
+    	num_output: 32
+    	pad: 3
+    	kernel_size: 7
+    	weight_filler {
+      		type: "msra"
+    	}
+    	bias_filler {
+      		type: "constant"
+      		value: 0
+    	}
+  	}
+}
+
+layer {
+	name: "ReluColor1"
+	type: "ReLU"
+	bottom: "ConvColor1"
+	top: "ConvColor1"
+}
+
+layer {
+	name: "ConvColor2"
+	type: "Convolution"
+	bottom: "ConvColor1"
+	top: "ConvColor2"
+	param {
+    	name: "conv2c_w"
+    	lr_mult: 1
+    	decay_mult: 1
+    }
+    param {
+    	name: "conv2c_b"
+    	lr_mult: 2
+    	decay_mult: 0
+    }
+    convolution_param {
+    	num_output: 64
+    	pad: 3
+    	kernel_size: 7
+    	weight_filler {
+      		type: "msra"
+    	}
+    	bias_filler {
+      		type: "constant"
+      		value: 0
+    	}
+  	}
+}
+
+layer {
+	name: "ReluColor2"
+	type: "ReLU"
+	bottom: "ConvColor2"
+	top: "ConvColor2"
+}
+
+layer {
+	name: "ConvColor3"
+	type: "Convolution"
+	bottom: "ConvColor2"
+	top: "ConvColor3"
+	param {
+    	name: "conv3c_w"
+    	lr_mult: 1
+    	decay_mult: 1
+    }
+    param {
+    	name: "conv3c_b"
+    	lr_mult: 2
+    	decay_mult: 0
+    }
+    convolution_param {
+    	num_output: 32
+    	pad: 3
+    	kernel_size: 7
+    	weight_filler {
+      		type: "msra"
+    	}
+    	bias_filler {
+      		type: "constant"
+      		value: 0
+    	}
+  	}
+}
+
+layer {
+	name: "ReluColor3"
+	type: "ReLU"
+	bottom: "ConvColor3"
+	top: "ConvColor3"
+}
+
+layer {
+	name: "ConvColor4"
+	type: "Convolution"
+	bottom: "ConvColor3"
+	top: "ConvColor4"
+	param {
+    	name: "conv4c_w"
+    	lr_mult: 1
+    	decay_mult: 1
+    }
+    param {
+    	name: "conv4c_b"
+    	lr_mult: 2
+    	decay_mult: 0
+    }
+    convolution_param {
+    	num_output: 16
+    	pad: 3
+    	kernel_size: 7
+    	weight_filler {
+      		type: "msra"
+    	}
+    	bias_filler {
+      		type: "constant"
+      		value: 0
+    	}
+  	}
+}
+
+layer {
+	name: "ReluColor4"
+	type: "ReLU"
+	bottom: "ConvColor4"
+	top: "ConvColor4"
+}
+
+layer {
+	name: "output"
+	type: "Convolution"
+	bottom: "ConvColor4"
+	top: "output"
+	param {
+		name: "conv5c_w"
+		lr_mult: 1
+		decay_mult: 1
+	}
+	param {
+		name: "conv5c_b"
+		lr_mult: 2
+		decay_mult: 0
+	}
+	convolution_param {
+		num_output: 1
+		pad: 3
+		kernel_size: 7
+		weight_filler {
+			type: "msra"
+		}
+		bias_filler {
+			type: "constant"
+			value: 0
+		}
+	}
+}
+
+layer {
+    name: "sum"
+    type: "Eltwise"
+    bottom: "output"
+    bottom: "VDSR_CV"
+    top: "sum_res"
+    eltwise_param {
+        operation: 1
+    }
+}

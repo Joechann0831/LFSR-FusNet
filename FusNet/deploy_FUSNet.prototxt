@@ -1,0 +1,210 @@
+input: "img_ext"
+input_dim: 1 input_dim: 1 input_dim: 200 input_dim: 200
+input: "img_int"
+input_dim: 1 input_dim: 1 input_dim: 200 input_dim: 200
+
+layer {
+  name: "concat1"
+  type: "Concat"
+  bottom: "img_ext"
+  bottom: "img_int"
+  top: "conv1_input"
+  concat_param {
+    axis: 1
+  }
+}
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "conv1_input"
+  top: "conv1"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 0.1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "relu1"
+  type: "ReLU"
+  bottom: "conv1"
+  top: "conv1"
+}
+
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "conv1"
+  top: "conv2"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 0.1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "relu2"
+  type: "ReLU"
+  bottom: "conv2"
+  top: "conv2"
+}
+
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "conv2"
+  top: "conv3"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 0.1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "relu3"
+  type: "ReLU"
+  bottom: "conv3"
+  top: "conv3"
+}
+
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "conv3"
+  top: "conv4"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 0.1
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "relu4"
+  type: "ReLU"
+  bottom: "conv4"
+  top: "conv4"
+}
+
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "conv5"
+  param {
+    lr_mult: 1
+  }
+  param {
+    lr_mult: 0.1
+  }
+  convolution_param {
+    num_output: 1
+    kernel_size: 3
+    stride: 1
+    pad: 1
+    weight_filler {
+      type: "msra"
+    }
+    bias_filler {
+      type: "constant"
+    }
+  }
+}
+
+layer {
+  name: "sigmoid1"
+  type: "Sigmoid"
+  bottom: "conv5"
+  top: "fus_weight"
+}
+
+layer {
+  name: "ext_sub_int"
+  type: "Eltwise"
+  bottom: "img_ext"
+  bottom: "img_int"
+  top: "ext_sub_int"
+  eltwise_param {
+    operation: SUM
+    coeff: 1
+    coeff: -1
+  }
+}
+
+layer {
+  name: "weighting"
+  type: "Eltwise"
+  bottom: "ext_sub_int"
+  bottom: "fus_weight"
+  top: "weighting_sub"
+  eltwise_param {
+    operation: PROD
+  }
+}
+
+layer {
+  name: "Fusion"
+  type: "Eltwise"
+  bottom: "weighting_sub"
+  bottom: "img_int"
+  top: "fus"
+  eltwise_param {
+    operation: SUM
+  }
+}
