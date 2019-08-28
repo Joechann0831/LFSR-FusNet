@@ -1,6 +1,7 @@
 # Light field super-resolution by jointly exploiting internal and external similarities
 
 **Official implementation** for the following paper
+
 Zhen Cheng, Zhiwei Xiong*, Dong Liu, "[Light field super-resolution by jointly exploiting internal and external similarities](https://ieeexplore.ieee.org/document/8733069)", IEEE Transactions on Circuits and Systems for Video Technology (T-CSVT), In press.
 
 ## Requirements
