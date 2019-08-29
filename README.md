@@ -7,8 +7,6 @@ Zhen Cheng, Zhiwei Xiong*, Dong Liu, "[Light field super-resolution by jointly e
 ## Requirements
 - Caffe 1.0
 - CUDA and Cudnn suited for Caffe 1.0
-<<<<<<< HEAD
 - MATLAB with pre-compiled matcaffe
-=======
-- MATLAB with pre-compiled matcaffe
->>>>>>> 
+## Usage
+
