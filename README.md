@@ -24,7 +24,7 @@ VDSR is used for initializing the HR inputs of EnhanceCNN. We re-train the netwo
 
 ### disparity estimation
 
-Disparity estimation is an important procedure in our framework cause the estimated disparity map will be used for both PRO-IB and EnhanceCNN. We adopt the state-of-the-art method proposed in [3], the official code can be find at [http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip).
+Disparity estimation is an important procedure in our framework cause the estimated disparity map will be used for both PRO-IB and EnhanceCNN. We adopt the state-of-the-art method proposed in [3], the official code can be found at [http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip).
 
 ### warp
 
