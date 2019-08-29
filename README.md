@@ -16,7 +16,7 @@ In this repo, we provide the trained models and the network configurations for V
 
 ### PRO-IB
 
-PRO-IB is the advanced projection-based light field SR algorithm, we've released the re-implmentation codes. Please refer to [code for PRO](https://github.com/Joechann0831/LFSRBenchmark/tree/master/PRO) for detailed information.
+PRO-IB is the advanced projection-based light field SR algorithm. We've released the re-implmentation codes. Please refer to [code for PRO](https://github.com/Joechann0831/LFSRBenchmark/tree/master/PRO) for detailed information.
 
 ### VDSR
 
@@ -28,7 +28,7 @@ Disparity estimation is an important procedure in our framework, since the estim
 
 ### warp
 
-The operation warp is used to align the reference view to the target view using the disparity map between them. If you want to implement it using MATLAB, you can refer to the MATLAB function *interp2*. If you want it as a Caffe layer (i.e., implemented with CUDA), you can refer to the code of [FlowNet](http://lmb.informatik.uni-freiburg.de//Publications/2017/IMKDB17) or [LFVcode](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/SIG17/lfv/). Note that our framework is not end-to-end, so it's not necessary to implement the warp operation using Caffe.
+The warp operation is used to align the reference view to the target view using the disparity map between them. If you want to implement it using MATLAB, you can refer to the MATLAB function *interp2*. If you want it as a Caffe layer (i.e., implemented with CUDA), you can refer to the code of [FlowNet](http://lmb.informatik.uni-freiburg.de//Publications/2017/IMKDB17) or [LFVcode](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/SIG17/lfv/). Note that our framework is not end-to-end, so it's not necessary to implement the warp operation using Caffe.
 
 ### EnhanceCNN and FusNet
 
@@ -43,5 +43,3 @@ We provide the trained model parameters and the network configuration files of E
 [3] T. C. Wang, A. A. Efros, and R. Ramamoorthi. Occlusion-aware depth estimation using light-field cameras. In ICCV, 2015.
 
 [4] C.-K. Liang and R. Ramamoorthi. A light transport framework for lenslet light field cameras. ACM Transactions on Graphics, 34(2):16:1-16:19, 2015.
-
-
