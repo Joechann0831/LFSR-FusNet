@@ -10,29 +10,30 @@ Zhen Cheng, Zhiwei Xiong*, Dong Liu, "[Light field super-resolution by jointly e
 - MATLAB with pre-compiled matcaffe
 ## Usage
 
-Our framework consists of 6 main procedures: **PRO-IB**, **VDSR** [1], **disparity estimation**, **warp**, **EnhanceCNN** and **FusNet**. 
+Our framework consists of 6 main procedures: **PRO-IB** [4], **VDSR** [1], **disparity estimation** [3], **warp**, **EnhanceCNN** and **FusNet**. 
 
-In this repo, we provide the pretrained model parameters as well as the network configurations of VDSR, EnhanceCNN and FusNet. The other procedures can be easily found or implemented.
+In this repo, we provide the trained models and the network configurations for VDSR, EnhanceCNN, and FusNet, respectively. The other procedures can be reproduced by using either the official projects or our re-implementation codes.
 
 ### PRO-IB
 
-PRO-IB is the advanced projection-based light field SR algorithm, we've already released the code.  Please refer to [code for PRO](https://github.com/Joechann0831/LFSRBenchmark/tree/master/PRO) for usage.
+PRO-IB is the advanced projection-based light field SR algorithm. We've released the re-implmentation codes. Please refer to [code for PRO](https://github.com/Joechann0831/LFSRBenchmark/tree/master/PRO) for detailed information.
 
 ### VDSR
 
-VDSR is used for initializing the HR inputs of EnhanceCNN. We re-train the network for Gaussian downsampling with scale 3 using the same dataset as in [1]. For complete training and testing codes, please refer to [Our re-implementation of VDSR with Caffe](https://github.com/Joechann0831/LFSRBenchmark/tree/master/VDSR).
+VDSR is originally designed for single image SR [1]. We adopte the pre-trained weights of VDSR for initialization, which generates the HR inputs of EnhanceCNN. We re-train the network for Gaussian downsampling at a scale factor of 3 using the same dataset as in [1]. Please refer to [our re-implementation of VDSR with Caffe](https://github.com/Joechann0831/LFSRBenchmark/tree/master/VDSR) for detailed information.
 
 ### disparity estimation
 
-Disparity estimation is an important procedure in our framework cause the estimated disparity map will be used for both PRO-IB and EnhanceCNN. We adopt the state-of-the-art method proposed in [3], the official code can be found at [http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip).
+Disparity estimation is an important procedure in our framework, since the estimated disparity map will be used for both PRO-IB and EnhanceCNN. We adopt the state-of-the-art method proposed in [3] for disparity estimation. The official code can be found at [http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip).
+
 
 ### warp
 
-The operation warp is used to align the reference view to the target view using the disparity map between them. If you want to implement it using MATLAB, you can refer to the MATLAB function *interp2*. If you want it as a Caffe layer (i.e., implemented with CUDA), you can refer to the code of [FlowNet](http://lmb.informatik.uni-freiburg.de//Publications/2017/IMKDB17) or [LFVcode](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/SIG17/lfv/). Note that our framework is not end-to-end, so it's not necessary to implement the warp operation using Caffe.
+The warp operation is used to align the reference view to the target view using the disparity map between them. If you want to implement it using MATLAB, you can refer to the MATLAB function *interp2*. If you want it as a Caffe layer (i.e., implemented with CUDA), you can refer to the code of [FlowNet](http://lmb.informatik.uni-freiburg.de//Publications/2017/IMKDB17) or [LFVcode](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/SIG17/lfv/). Note that our framework is not end-to-end, so it's not necessary to implement the warp operation using Caffe.
 
 ### EnhanceCNN and FusNet
 
-We provide the trained model parameters and the network configuration files of EnhanceCNN and FusNet here. The parameters are trained with EPFL dataset [2].
+We provide the trained model parameters and the network configuration files of EnhanceCNN and FusNet in this repo. The parameters are trained on EPFL dataset [2].
 
 ## Reference
 
@@ -42,3 +43,4 @@ We provide the trained model parameters and the network configuration files of E
 
 [3] T. C. Wang, A. A. Efros, and R. Ramamoorthi. Occlusion-aware depth estimation using light-field cameras. In ICCV, 2015.
 
+[4] C.-K. Liang and R. Ramamoorthi. A light transport framework for lenslet light field cameras. ACM Transactions on Graphics, 34(2):16:1-16:19, 2015.
