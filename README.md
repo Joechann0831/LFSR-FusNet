@@ -10,3 +10,7 @@ Zhen Cheng, Zhiwei Xiong*, Dong Liu, "[Light field super-resolution by jointly e
 - MATLAB with pre-compiled matcaffe
 ## Usage
 
+## TODO
+
+- [ ] Release source code of Caffe and corresponding MATLAB codes
+- [ ] Complete README
