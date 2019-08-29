@@ -12,7 +12,7 @@ Zhen Cheng, Zhiwei Xiong*, Dong Liu, "[Light field super-resolution by jointly e
 
 Our framework consists of 6 main procedures: **PRO-IB**, **VDSR** [1], **disparity estimation**, **warp**, **EnhanceCNN** and **FusNet**. 
 
-In this repo, we provide the model parameters of VDSR, EnhanceCNN and FusNet trained with EPFL dataset [2]. For testing and training, we also provide the network configuration file with format of *.prototxt*.
+In this repo, we provide the pretrained model parameters as well as the network configurations of VDSR, EnhanceCNN and FusNet. The other procedures can be found publicly or easily implemented.
 
 ### PRO-IB
 
