@@ -10,7 +10,7 @@ Zhen Cheng, Zhiwei Xiong*, Dong Liu, "[Light field super-resolution by jointly e
 - MATLAB with pre-compiled matcaffe
 ## Usage
 
-Our framework consists of 6 main procedures: **PRO-IB**, **VDSR** [1], **disparity estimation** [3], **warp**, **EnhanceCNN** and **FusNet**. 
+Our framework consists of 6 main procedures: **PRO-IB**, **VDSR** [1], **Disparity estimation** [3], **Warp**, **EnhanceCNN** and **FusNet**. 
 
 In this repo, we provide the trained models and the network configurations for VDSR, EnhanceCNN, and FusNet, respectively. The other procedures can be reproduced by using either the official projects or our re-implementation codes.
 
@@ -22,12 +22,12 @@ PRO-IB is an advanced version of the traditional projection-based light field SR
 
 VDSR is originally designed for single image SR [1]. We adopt the pre-trained weights of VDSR for initialization, which generates the HR inputs of EnhanceCNN. We re-train the network for Gaussian downsampling at a scale factor of 3 using the same dataset as in [1]. Please refer to [our re-implementation of VDSR with Caffe](https://github.com/Joechann0831/LFSRBenchmark/tree/master/VDSR) for detailed information.
 
-### disparity estimation
+### Disparity estimation
 
 Disparity estimation is an important procedure in our framework, since the estimated disparity map will be used for both PRO-IB and EnhanceCNN. We adopt the state-of-the-art method proposed in [3] for disparity estimation. The official code can be found at [http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ICCV15/occCode.zip).
 
 
-### warp
+### Warp
 
 The warp operation is used to align the reference view to the target view using the disparity map between them. If you want to implement it using MATLAB, you can refer to the MATLAB function *interp2*. If you want it as a Caffe layer (i.e., implemented with CUDA), you can refer to the code of [FlowNet](http://lmb.informatik.uni-freiburg.de//Publications/2017/IMKDB17) or [LFVcode](http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/SIG17/lfv/). Note that our framework is not end-to-end, so it's not necessary to implement the warp operation using Caffe.
 
